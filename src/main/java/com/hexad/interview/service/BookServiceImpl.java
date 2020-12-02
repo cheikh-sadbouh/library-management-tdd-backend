@@ -41,9 +41,6 @@ public class BookServiceImpl implements IBookService {
                 System.out.println("book deleted");
               } else {
                 book.setNumberOfCopy(book.getNumberOfCopy() - 1);
-                //  System.out.println("List  after removing librarybookList: " +
-                // bookRepository.getLibrarybookList());
-
               }
             });
   }
@@ -51,9 +48,5 @@ public class BookServiceImpl implements IBookService {
   @Override
   public void removeBook(Book book) {
     bookRepository.getLibraryBookList().remove(book);
-    //   System.out.println( "return "+ bookRepository.getLibrarybookList().remove(book));
-    // System.out.println( "contain "+     bookRepository.getLibrarybookList().contains(book));
-    // System.out.println("List  after removing librarybookList: " +
-    // bookRepository.getLibrarybookList());
   }
 }

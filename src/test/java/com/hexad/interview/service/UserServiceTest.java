@@ -15,11 +15,11 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
-import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -30,7 +30,7 @@ public class UserServiceTest {
 
   @Test
   public void Should_BorrowBook_When_BookIsFoundInLibraryBookList() {
-    given(bookService.findBookById("1")).willReturn(Optional.of(new Book("1", "book1", 2,"","")));
+    given(bookService.findBookById("1")).willReturn(Optional.of(new Book("1", "book1", 2, "", "")));
     doReturn(new User("1", "user1", new ArrayList<>())).when(userRepository).getUser();
     assertThat(userService.borrowBook("1")).isEqualTo("book 1 has been borrowed");
     assertThat(userRepository.getUser().getBorrowedBookList().size()).isOne();
@@ -60,7 +60,9 @@ public class UserServiceTest {
 
   @Test
   public void Should_ReturnBook_When_BookIsFoundInBorrowedBookList() {
-    doReturn(new User("1", "user1", new ArrayList<>(Arrays.asList(new Book("1", "book1", 2,"","")))))
+    doReturn(
+            new User(
+                "1", "user1", new ArrayList<>(Arrays.asList(new Book("1", "book1", 2, "", "")))))
         .when(userRepository)
         .getUser();
 
@@ -71,7 +73,9 @@ public class UserServiceTest {
 
   @Test
   public void Should_NotReturnBook_When_BookIsNotFoundInBorrowedBookList() {
-    doReturn(new User("1", "user1", new ArrayList<>(Arrays.asList(new Book("2", "book1", 2,"","")))))
+    doReturn(
+            new User(
+                "1", "user1", new ArrayList<>(Arrays.asList(new Book("2", "book1", 2, "", "")))))
         .when(userRepository)
         .getUser();
 
@@ -82,7 +86,9 @@ public class UserServiceTest {
 
   @Test
   public void Should_ReturnBorrowedBookList_When_RequestedByUser() {
-    doReturn(new User("1", "user1", new ArrayList<>(Arrays.asList(new Book("2", "book1", 2,"","")))))
+    doReturn(
+            new User(
+                "1", "user1", new ArrayList<>(Arrays.asList(new Book("2", "book1", 2, "", "")))))
         .when(userRepository)
         .getUser();
     assertThat(userService.getBorrowedBooks().get().size()).isOne();
@@ -93,7 +99,8 @@ public class UserServiceTest {
     doReturn(
             Optional.of(
                 new HashSet<>(
-                    Arrays.asList(new Book("1", "book1", 20,"",""), new Book("2", "book2", 40,"","")))))
+                    Arrays.asList(
+                        new Book("1", "book1", 20, "", ""), new Book("2", "book2", 40, "", "")))))
         .when(bookService)
         .getLibraryBookList();
     assertThat(userService.getLibraryBookList().size()).isEqualTo(2);

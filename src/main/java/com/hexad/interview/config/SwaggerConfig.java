@@ -1,6 +1,5 @@
 package com.hexad.interview.config;
 
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -15,27 +14,28 @@ import static springfox.documentation.builders.PathSelectors.regex;
 @Configuration
 public class SwaggerConfig {
 
-    @Bean
-    public Docket productApi() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("com.hexad.interview"))
-                .paths(regex("/api/v1.*"))
-                .build()
-                .apiInfo(metaInfo());
-    }
-    private ApiInfo metaInfo() {
+  @Bean
+  public Docket productApi() {
+    return new Docket(DocumentationType.SWAGGER_2)
+        .select()
+        .apis(RequestHandlerSelectors.basePackage("com.hexad.interview"))
+        .paths(regex("/api/v1.*"))
+        .build()
+        .apiInfo(metaInfo());
+  }
 
-        ApiInfo apiInfo = new ApiInfo(
-                "Library Management API",
-                "Library Management API interview @ Hexad",
-                "1.0",
-                "Terms of Service",
-                "Cheikh_Sadbouh",
-                "Apache License Version 2.0",
-                "https://www.apache.org/licesen.html"
-        );
+  private ApiInfo metaInfo() {
 
-        return apiInfo;
-    }
+    ApiInfo apiInfo =
+        new ApiInfo(
+            "Library Management API",
+            "Library Management API interview @ Hexad",
+            "1.0",
+            "Terms of Service",
+            "Cheikh_Sadbouh",
+            "Apache License Version 2.0",
+            "https://www.apache.org/licesen.html");
+
+    return apiInfo;
+  }
 }

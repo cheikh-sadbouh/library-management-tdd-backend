@@ -15,22 +15,19 @@ import java.util.Set;
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/v1")
-@Api( description = "Provide Rest API to Manage Library ")
+@Api(description = "Provide Rest API to Manage Library ")
 public class UserController {
-  @Autowired
-  IUserService userService;
+  @Autowired IUserService userService;
   @Autowired private IBookService bookService;
 
   @GetMapping(value = "/libraryBooks")
   public ResponseEntity<Set<Book>> getLibraryBooks() {
-    System.out.print(bookService
-            .getLibraryBookList().get().size());
+
     return bookService
         .getLibraryBookList()
         .map(books -> new ResponseEntity<>(books, HttpStatus.OK))
         .orElseGet(() -> new ResponseEntity<>(HttpStatus.NO_CONTENT));
   }
-
 
   @GetMapping("/BorrowedBooks")
   public ResponseEntity<List<Book>> getBorrowedBookList() {
@@ -39,7 +36,6 @@ public class UserController {
         .map(books -> new ResponseEntity<>(books, HttpStatus.OK))
         .orElseGet(() -> new ResponseEntity<>(HttpStatus.NO_CONTENT));
   }
-
 
   @PutMapping("/BorrowBook/{bookId}")
   public ResponseEntity<String> borrowBook(@PathVariable("bookId") String bookId) {

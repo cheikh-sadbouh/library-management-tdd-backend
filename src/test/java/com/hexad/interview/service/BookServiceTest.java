@@ -14,8 +14,8 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Optional;
 
-import static org.mockito.BDDMockito.given;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -30,11 +30,11 @@ class BookServiceTest {
         .willReturn(
             new HashSet<>(
                 Arrays.asList(
-                    new Book("1", "book1", 5,"",""),
-                    new Book("2", "book2", 3,"",""),
-                    new Book("3", "book3", 4,"",""),
-                    new Book("4", "book4", 5,"",""),
-                    new Book("5", "book5", 1,"",""))));
+                    new Book("1", "book1", 5, "", ""),
+                    new Book("2", "book2", 3, "", ""),
+                    new Book("3", "book3", 4, "", ""),
+                    new Book("4", "book4", 5, "", ""),
+                    new Book("5", "book5", 1, "", ""))));
   }
 
   @Test
@@ -44,7 +44,8 @@ class BookServiceTest {
 
   @Test
   void Should_FindBook_When_BookExists() {
-    assertThat(bookService.findBookById("1")).isEqualTo(Optional.of(new Book("1", "book1", 5,"","")));
+    assertThat(bookService.findBookById("1"))
+        .isEqualTo(Optional.of(new Book("1", "book1", 5, "", "")));
   }
 
   @Test
@@ -74,7 +75,7 @@ class BookServiceTest {
 
   @Test
   void Should_RemoveBook_When_BookIsFound() {
-    bookService.removeBook(new Book("1", "book1", 5,"",""));
+    bookService.removeBook(new Book("1", "book1", 5, "", ""));
     assertThat(bookRepository.getLibraryBookList().size()).isEqualTo(4);
   }
 }

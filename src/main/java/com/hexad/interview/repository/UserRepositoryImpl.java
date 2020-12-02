@@ -7,7 +7,8 @@ import java.util.ArrayList;
 
 @Repository
 public class UserRepositoryImpl implements IUserRepository {
-   User user = new User("1", "user1", new ArrayList<>());
+  User user = new User("1", "user1", new ArrayList<>());
+
   @Override
   public User getUser() {
     return user;
